@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html class="js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!-- Theme color -->
+    <meta name="theme-color" content="{{ settings.color_background | default: '#000000' }}">
+
+    <!-- Robots for private/staging/password pages -->
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta name="facebook-domain-verification" content="sd9ntahk204ty8kujdfxg63mbre2ar">
+
+    <title>{% if page_title %}{{ page_title }}{% else %}{{ shop.name }}{% endif %}</title>
+    {% render 'meta-tags' %}
+    {% render 'structured-data' %}
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- endunless -%}
+
+    {%- unless settings.type_body_font.system? -%}
+      {{ settings.type_body_font | font_url | preload_tag }}
+    {%- endunless -%}
+    {%- unless settings.type_header_font.system? -%}
+      {{ settings.type_header_font | font_url | preload_tag }}
+    {%- endunless -%}
+
+    {{ content_for_header }}
+
+    <style>
+      :root {
+        {% render 'css-variables' %}
+        --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+        --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+        --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
+        --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
+        --page-width: {{ settings.page_width | divided_by: 10 }}rem;
+        --product-card-corner-radius: {{ settings.card_corner_radius | divided_by: 10.0 }}rem;
+        --buttons-radius: {{ settings.buttons_radius }}px;
+
+        /* Custom neon colors for Iron Phoenix */
+        --color-neon-pink: 255, 16, 240;
+        --color-neon-yellow: 255, 255, 0;
+        --color-neon-green: 57, 255, 20;
+        --color-teal: 38, 166, 154;
+        --color-black: 0, 0, 0;
+        --color-white: 255, 255, 255;
+      }
+
+      html {
+        box-sizing: border-box;
+        font-size: calc(var(--font-body-scale) * 62.5%);
+      }
+
+      body {
+        display: grid;
+        grid-template-rows: auto auto 1fr auto;
+        min-height: 100%;
+        margin: 0;
+        font-size: 1.5rem;
+        background-color: rgb(var(--color-black, 0, 0, 0));
+        color: rgb(var(--color-white, 255, 255, 255));
+      }
+
+      @media screen and (min-width: 750px) {
+        body { font-size: 1.6rem; }
+      }
+    </style>
+
+    <link rel="stylesheet" href="{{ 'base.css' | asset_url }}">
+    {{ 'contact-us.css' | asset_url | stylesheet_tag }}
+    {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
+    <link rel="stylesheet" href="{{ 'section-main-product.css' | asset_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ 'critical.css' | asset_url }}">
+    {{ 'component-header.css' | asset_url | stylesheet_tag }}
+
+    <script defer src="{{ 'analytics.js' | asset_url }}"></script>
+
+    {% if settings.gtm_id != blank %}
+      <!-- Google Tag Manager -->
+      <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;
+        j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+        f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','{{ settings.gtm_id }}');
+      </script>
+      <!-- End Google Tag Manager -->
+    {% endif %}
+
+    {% if settings.ga4_id != blank %}
+      <!-- Google Analytics GA4 -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id={{ settings.ga4_id }}"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ settings.ga4_id }}');
+      </script>
+    {% endif %}
+  </head>
+
+  <body class="gradient">
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TQD686VL" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+
+    {% if settings.logo_image != blank %}
+      <img
+        src="{{ settings.logo_image | image_url: width: 400 }}"
+        alt="{{ shop.name | escape }}"
+        width="220"
+        height="80"
+        style="max-width: 220px; width: 100%; height: auto; display: block; margin: 2rem auto;"
+        loading="lazy"
+      >
+    {% endif %}
+    <h1 style="color: {{ settings.color_primary }}">{{ settings.store_tagline | escape }}</h1>
+
+    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+      {{ 'accessibility.skip_to_text' | t }}
+    </a>
+
+    {% if settings.cart_type == 'drawer' and 'cart-drawer' in shop.snippets %}
+      {% render 'cart-drawer' %}
+    {% endif %}
+
+    {% section 'header' %}
+    {% section 'brand-story' %}
+    {% section 'hero-custom' %}
+
+    <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    <ul hidden>
+      <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
+      <li id="a11y-loading-message">{{ 'accessibility.loading' | t }}</li>
+      <li id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</li>
+    </ul>
+
+    <script>
+      window.shopUrl = '{{ request.origin }}';
+      window.routes = {
+        cart_add_url: '{{ routes.cart_add_url }}',
+        cart_change_url: '{{ routes.cart_change_url }}',
+        cart_update_url: '{{ routes.cart_update_url }}',
+        cart_url: '{{ routes.cart_url }}',
+        predictive_search_url: '{{ routes.predictive_search_url }}'
+      };
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const targetFormActions = ['/contact', '/comments', '/account', '/cart/add', '/search'];
+        const forms = document.querySelectorAll(targetFormActions.map(a => `form[action*="${a}"]`).join(', '));
+        forms.forEach(form => {
+          if (form.dataset.botProtectionAdded) return;
+          form.dataset.botProtectionAdded = 'true';
+
+          let timestamp = document.createElement('input');
+          timestamp.type = 'hidden';
+          timestamp.name = 'form_load_timestamp';
+          timestamp.value = Date.now();
+          form.prepend(timestamp);
+
+          let honeypotDiv = document.createElement('div');
+          honeypotDiv.setAttribute('aria-hidden', 'true');
+          honeypotDiv.style.cssText = 'position:absolute;left:-9999px;top:-9999px;height:1px;width:1px;overflow:hidden;';
+          honeypotDiv.innerHTML = `
+            <label for="honeypot_dynamic_field">Don't fill this out if you're human:</label>
+            <input type="text" name="honeypot_website_url" id="honeypot_dynamic_field" tabindex="-1" autocomplete="off" />
+          `;
+          form.prepend(honeypotDiv);
+        });
+      });
+    </script>
+
+    {% sections 'footer-group' %}
+  </body>
+</html>
