@@ -1,0 +1,19 @@
+<cart-drawer id="CartDrawer" class="cart-drawer" aria-hidden="true">
+  <div id="CartDrawer-Overlay" class="cart-drawer-overlay"></div>
+  <div class="drawer__inner">
+    {% if cart.item_count > 0 %}
+      {% for item in cart.items %}
+        <div class="drawer-item">
+          {{ item.image | image_url: width: 60 | image_tag: alt: item.title, loading: 'lazy' }}
+          <div class="item-details">
+            <p>{{ item.title | escape }}</p>
+            <p>{{ item.quantity }} × {{ item.final_line_price | money }}</p>
+            <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0">Remove</a>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="drawer__inner-empty">Your cart is empty.</div>
+    {% endif %}
+  </div>
+</cart-drawer>

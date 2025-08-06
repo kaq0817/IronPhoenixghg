@@ -1,0 +1,29 @@
+{%- comment -%}
+  Renders a single collection card.
+{%- endcomment -%}
+
+<div class="card-collection">
+  <a href="{{ card_collection.url }}" class="card-link">
+    <div class="card-media">
+      {%- if card_collection.featured_image -%}
+        <img
+          src="{{ card_collection.featured_image | image_url: width: 600 }}"
+          alt="{{ card_collection.title | escape }}"
+          loading="lazy"
+          width="600"
+          height="{{ card_collection.featured_image.height | divided_by: card_collection.featured_image.width | times: 600 | round }}"
+        >
+      {%- else -%}
+        <div class="placeholder-image">
+          <span>No image available</span>
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="card-content">
+      <h3 class="card-title">{{ card_collection.title | escape }}</h3>
+      <p class="card-count">
+        {{ card_collection.all_products_count }} product{{ card_collection.all_products_count != 1  | pluralize: '', 's' }}
+      </p>
+    </div>
+  </a>
+</div>

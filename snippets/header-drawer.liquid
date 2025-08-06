@@ -1,0 +1,91 @@
+{% comment %}
+  Header Drawer Section
+  Last updated: Aug 2025 by Mischief the Coding Cat 😸
+  This section creates a responsive slide-out menu (drawer) for mobile navigation.
+{% endcomment %}
+
+<div id="header-drawer" class="header-drawer" aria-hidden="true">
+  <div class="header-drawer__overlay" tabindex="-1" aria-label="Close menu"></div>
+  <nav class="header-drawer__nav" role="navigation" aria-label="Mobile Menu">
+    <button class="header-drawer__close" aria-label="Close menu" type="button">
+      &times;
+    </button>
+    <ul class="header-drawer__menu" role="list">
+      {% for link in linklists[section.settings.menu].links %}
+        <li>
+          <a href="{{ link.url }}" class="header-drawer__link" {% if link.active %}aria-current="page"{% endif %}>
+            {{ link.title | escape }}
+          </a>
+          {% if link.links.size > 0 %}
+            <ul class="header-drawer__submenu" role="list">
+              {% for sublink in link.links %}
+                <li>
+                  <a href="{{ sublink.url }}" class="header-drawer__sublink" {% if sublink.active %}aria-current="page"{% endif %}>
+                    {{ sublink.title | escape }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+</div>
+
+<button id="header-drawer-toggle" class="header-drawer-toggle" aria-controls="header-drawer" aria-expanded="false" aria-label="Open menu">
+  <span class="header-drawer__hamburger">&#9776;</span>
+</button>
+
+{{ 'header-drawer.css' | asset_url | stylesheet_tag }}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const drawer = document.getElementById('header-drawer');
+    const toggle = document.getElementById('header-drawer-toggle');
+    const overlay = drawer.querySelector('.header-drawer__overlay');
+    const closeBtn = drawer.querySelector('.header-drawer__close');
+
+    function openDrawer() {
+      drawer.setAttribute('aria-hidden', 'false');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('drawer-open');
+    }
+
+    function closeDrawer() {
+      drawer.setAttribute('aria-hidden', 'true');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('drawer-open');
+    }
+
+    toggle.addEventListener('click', openDrawer);
+    closeBtn.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+
+    // ESC key closes drawer
+    document.addEventListener('keydown', function(e) {
+      if (e.key === "Escape" && drawer.getAttribute('aria-hidden') === 'false') {
+        closeDrawer();
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Header Drawer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Select menu",
+      "default": "main-menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header Drawer"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,30 @@
+<ul class="cart-items">
+  {% for item in cart.items %}
+    <li class="cart-item" data-key="{{ item.key }}">
+      <div class="cart-item__image">
+        <a href="{{ item.url }}">
+          {{ item.image | image_url: width: 150 | image_tag: alt: item.title | escape }}
+        </a>
+      </div>
+      <div class="cart-item__details">
+        <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title | escape }}</a>
+        {% if item.variant.title != 'Default Title' %}
+          <div class="cart-item__variant">{{ item.variant.title | escape }}</div>
+        {% endif %}
+        <div class="cart-item__price">
+          {{ item.original_line_price | money }}
+        </div>
+        <div class="cart-item__quantity">
+          <button class="quantity-button" data-action="decrease">−</button>
+          <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" class="quantity-input" data-key="{{ item.key }}">
+          <button class="quantity-button" data-action="increase">+</button>
+        </div>
+        <button class="cart-item__remove" aria-label="Remove {{ item.product.title | escape }}" data-remove-key="{{ item.key }}">×</button>
+      </div>
+    </li>
+  {% endfor %}
+</ul>
+
+{% if cart.items == empty %}
+  <p class="cart-empty">Your cart is currently empty.</p>
+{% endif %}

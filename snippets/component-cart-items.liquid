@@ -1,0 +1,8 @@
+<div class="cart-item__meta">
+  <p class="cart-meta-line">{{ item.product.metafields.custom.short_trade_description | escape }}</p>
+  <p class="cart-meta-line">{{ item.product.metafields.custom.male_female_unisex | escape }}</p>
+  <p class="cart-meta-line">{{ item.product.metafields.custom.google_color | escape }}</p>
+  {% if item.product.tags contains 'RespawnReady' %}
+    <span class="badge badge--respawn">🕹️ Ready to Respawn</span>
+  {% endif %}
+</div>

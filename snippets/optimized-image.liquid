@@ -1,0 +1,26 @@
+{%- comment -%}
+  Usage:
+  {% render 'optimized-image', image: your_image, alt: 'Description', class: 'custom-class', width_override: 600 %}
+{%- endcomment -%}
+
+{%- assign img_format = settings.image_format | default: 'webp' -%}
+{%- assign opt_level = settings.image_optimization_level | default: 'smart' -%}
+{%- assign img_width = 1200 -%}
+{%- if opt_level == 'aggressive' -%}
+  {%- assign img_width = 600 -%}
+{%- elsif opt_level == 'smart' -%}
+  {%- assign img_width = 900 -%}
+{%- elsif opt_level == 'original' -%}
+  {%- assign img_width = 2048 -%}
+{%- endif -%}
+{%- if width_override -%}
+  {%- assign img_width = width_override -%}
+{%- endif -%}
+<img
+  src="{{ image | image_url: width: img_width, format: img_format }}"
+  loading="lazy"
+  width="{{ img_width }}"
+  height="auto"
+  alt="{{ alt | escape }}"
+  {% if class %}class="{{ class }}"{% endif %}
+>

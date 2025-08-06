@@ -1,0 +1,217 @@
+[
+  {
+    "name": "Theme settings",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo_image",
+        "label": "Logo image"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      },
+      {
+        "type": "text",
+        "id": "store_tagline",
+        "label": "Store tagline",
+        "default": "Welcome to Iron Phoenix GHG"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary color (buttons, links, highlights)",
+        "default": "#26a69a"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Secondary color",
+        "default": "#004d40"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent color",
+        "default": "#e94f37"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text color",
+        "default": "#222222"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Body font",
+        "default": "system-ui"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "label": "Heading font",
+        "default": "system-ui"
+      },
+      {
+        "type": "range",
+        "id": "body_scale",
+        "label": "Body font size scale",
+        "default": 100,
+        "min": 80,
+        "max": 120,
+        "step": 1,
+        "unit": "%"
+      },
+      {
+        "type": "range",
+        "id": "heading_scale",
+        "label": "Heading font size scale",
+        "default": 120,
+        "min": 100,
+        "max": 160,
+        "step": 1,
+        "unit": "%"
+      },
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Page width",
+        "default": 120,
+        "min": 90,
+        "max": 180,
+        "step": 1,
+        "unit": "rem"
+      },
+      {
+        "type": "range",
+        "id": "card_corner_radius",
+        "label": "Card border radius",
+        "default": 8,
+        "min": 0,
+        "max": 32,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "buttons_radius",
+        "label": "Button border radius",
+        "default": 6,
+        "min": 0,
+        "max": 32,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_announcement",
+        "label": "Show announcement bar",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "announcement_text",
+        "label": "Announcement text",
+        "default": "🚨 Free shipping on orders over $50!"
+      },
+      {
+        "type": "color",
+        "id": "announcement_bg",
+        "label": "Announcement bar background",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "announcement_text_color",
+        "label": "Announcement bar text color",
+        "default": "#004d40"
+      },
+      {
+        "type": "url",
+        "id": "facebook_link",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "url",
+        "id": "twitter_link",
+        "label": "Twitter/X URL"
+      },
+      {
+        "type": "url",
+        "id": "instagram_link",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "youtube_link",
+        "label": "YouTube URL"
+      },
+      {
+        "type": "url",
+        "id": "tiktok_link",
+        "label": "TikTok URL"
+      },
+      {
+        "type": "url",
+        "id": "pinterest_link",
+        "label": "Pinterest URL"
+      },
+      {
+        "type": "text",
+        "id": "gtm_id",
+        "label": "Google Tag Manager ID"
+      },
+      {
+        "type": "text",
+        "id": "ga4_id",
+        "label": "Google Analytics GA4 ID"
+      },
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "default": "drawer",
+        "options": [
+          { "value": "drawer", "label": "Drawer" },
+          { "value": "page", "label": "Cart page" }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "image_optimization_level",
+        "label": "Image Optimization Level",
+        "default": "smart",
+        "options": [
+          { "value": "aggressive", "label": "Aggressive (smallest size, fastest loading)" },
+          { "value": "smart", "label": "Smart (balance quality and speed)" },
+          { "value": "original", "label": "Original (highest quality, slower loading)" }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "image_format",
+        "label": "Preferred Image Format",
+        "default": "webp",
+        "options": [
+          { "value": "webp", "label": "WebP (Best for modern browsers)" },
+          { "value": "jpeg", "label": "JPEG" },
+          { "value": "png", "label": "PNG" }
+        ]
+      },
+      {
+        "type": "textarea",
+        "id": "custom_css",
+        "label": "Custom CSS",
+        "default": ""
+      }
+    ]
+  }
+]

@@ -1,0 +1,77 @@
+{% comment %}
+  Announcement Bar - Iron Phoenix GHG
+  Displays a marketing message at the top of the page
+{% endcomment %}
+{{ 'component-announcement-bar.css' | asset_url | stylesheet_tag }}
+
+{% assign free_shipping_threshold = 50.0 %}
+<div class="announcement-bar"
+  style="background: {{ settings.announcement_bg | default: '#fff' }}; color: {{ settings.announcement_text_color | default: '#004d40' }};"
+  role="region" aria-label="Announcement">
+  <p class="announcement-text" id="free-shipping-message">
+    🚨 Free shipping on orders over ${{ free_shipping_threshold | money_without_trailing_zeros }}
+  </p>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var threshold = 50.00; // Your free shipping threshold
+  var messageEl = document.getElementById('free-shipping-message');
+
+  function updateMessage(cartTotal) {
+    if (cartTotal >= threshold) {
+      messageEl.textContent = "🚨 You’ve unlocked FREE shipping! 🎉";
+    } else {
+      var diff = (threshold - cartTotal).toFixed(2);
+      messageEl.textContent = `🚨 Only $${diff} away from free shipping!`;
+    }
+  }
+
+  // Fetch cart data (Shopify's /cart.js endpoint)
+  fetch('/cart.js')
+    .then(response => response.json())
+    .then(data => {
+      var total = data.total_price / 100; // convert cents to dollars
+      updateMessage(total);
+    });
+
+  // Optional: update on cart changes (if you have an AJAX cart)
+  document.addEventListener('cart:updated', function(e) {
+    var cart = e.detail.cart;
+    var total = cart.total_price / 100;
+    updateMessage(total);
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "🚨 Free shipping on orders over $50!"
+    },
+    {
+      "type": "color",
+      "id": "announcement_bg",
+      "label": "Announcement background",
+      "default": "#E94F37"
+    },
+    {
+      "type": "color",
+      "id": "announcement_text_color",
+      "label": "Announcement text color",
+      "default": "#fff"
+    }
+  ]
+}
+{% endschema %}
+

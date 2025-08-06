@@ -1,0 +1,56 @@
+{% comment %}
+  DEBUG: Article object = {{ article | json }}
+{% endcomment %}
+
+<article class="article-card card-wrapper color-{{ settings.blog_card_color_scheme | default: 'wellness' }}">
+  {% if article %}
+    {%- assign show_image = show_image | default: true -%}
+    {%- assign show_excerpt = show_excerpt | default: true -%}
+    {%- assign show_date = show_date | default: true -%}
+    {%- assign show_author = show_author | default: true -%}
+    {%- assign show_badge = show_badge | default: false -%}
+    {%- assign card_style = settings.blog_card_style | default: 'card' -%}
+    {%- assign media_aspect_ratio = media_aspect_ratio | default: 1.66 -%}
+
+    <div class="card {% if card_style == 'card' %}card--standard{% endif %}">
+      {%- if show_image and article.image -%}
+        <div class="article-card__image media media--square" style="aspect-ratio: {{ media_aspect_ratio }};">
+          <a href="{{ article.url }}">
+            <img
+              src="{{ article.image | image_url: width: 600 }}"
+              alt="{{ article.title | escape }}"
+              width="400"
+              height="200"
+              loading="lazy"
+              style="width: 100%; height: auto; border-radius: 8px;"
+            >
+          </a>
+        </div>
+      {%- endif -%}
+
+      <div class="card__content">
+        <h3 class="card__heading{% if show_excerpt %} h2{% endif %}">
+          <a href="{{ article.url }}" class="full-unstyled-link">
+            {{ article.title | truncate: 50 | escape }}
+          </a>
+        </h3>
+
+        {%- if show_excerpt and article.excerpt != blank -%}
+          <div class="article-card__excerpt">
+            {{ article.excerpt | strip_html | escape }}
+          </div>
+        {%- endif -%}
+
+        <div class="article-meta" style="font-size: 0.8rem; opacity: 0.7;">
+          {%- if show_date %}<span>{{ article.published_at | date: "%B %d, %Y" }}</span>{% endif %}
+          {%- if show_author and article.author %}<span> by {{ article.author | escape }}</span>{% endif %}
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <!-- Fallback: Show a message if no article data is available -->
+    <div class="article-card__empty">
+      <p>No article data available.</p>
+    </div>
+  {% endif %}
+</article>

@@ -1,0 +1,9 @@
+<section>
+  <h1>{{ 'customer.order.title' | t: name: order.name }}</h1>
+  <p>{{ 'customer.order.date' | t }}: {{ order.created_at | date: format: 'long' }}</p>
+  {% for line_item in order.line_items %}
+    <div>
+      <strong>{{ line_item.title }}</strong> — {{ line_item.quantity }}
+    </div>
+  {% endfor %}
+</section>

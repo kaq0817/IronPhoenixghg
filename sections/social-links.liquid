@@ -1,0 +1,101 @@
+{% comment %}
+  Prefilled Social Links Section – Iron Phoenix GHG
+{% endcomment %}
+
+<div class="footer__social-icons">
+  <ul>
+    {% for block in section.blocks %}
+      <li>
+        <a href="{{ block.settings.url }}" target="_blank" aria-label="{{ block.settings.platform }}">
+          {% render 'icon-' | append: block.settings.platform | downcase %}
+
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Social links",
+  "tag": "section",
+  "class": "section-social-links",
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "social",
+      "name": "Social Link",
+      "settings": [
+        {
+          "type": "select",
+          "id": "platform",
+          "label": "Platform",
+          "options": [
+            { "value": "youtube", "label": "YouTube" },
+            { "value": "facebook", "label": "Facebook" },
+            { "value": "twitter", "label": "Twitter / X" },
+            { "value": "pinterest", "label": "Pinterest" },
+            { "value": "tiktok", "label": "TikTok" },
+            { "value": "twitch", "label": "Twitch" }
+          ],
+          "default": "youtube"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Profile URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social links",
+      "blocks": [
+        {
+          "type": "social",
+          "settings": {
+            "platform": "youtube",
+            "url": "https://www.youtube.com/@ssgohardgaming"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "platform": "facebook",
+            "url": "https://www.facebook.com/GohardgamingIronPhoenix"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "platform": "twitter",
+            "url": "https://twitter.com/SSgohardgaming"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "platform": "pinterest",
+            "url": "https://www.pinterest.com/karenbrandmeyer"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "platform": "tiktok",
+            "url": "https://tiktok.com/@gohardgamingdiscord"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "platform": "twitch",
+            "url": "https://twitch.tv/shadowseeker_1"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

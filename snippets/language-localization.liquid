@@ -1,0 +1,5 @@
+<select id="LanguageSelector">
+  {% for language in localization.available_languages %}
+    <option value="{{ language.iso_code }}">{{ language.name }}</option>
+  {% endfor %}
+</select>

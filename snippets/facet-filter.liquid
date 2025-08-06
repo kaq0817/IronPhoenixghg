@@ -1,0 +1,38 @@
+<details
+  class="facet-filter"
+  {% if filter.active_values.size > 0 %}
+    open
+  {% endif %}
+>
+  <summary class="facet-filter__summary">
+    <span>{{ filter.label | escape }}</span>
+    <span class="facet-filter__count">
+      ({{ filter.values.size }})
+    </span>
+  </summary>
+  <ul class="facet-filter__list">
+    {% for value in filter.values %}
+      <li class="facet-filter__item">
+        <label>
+          <input
+            type="checkbox"
+            name="{{ value.param_name | escape }}"
+            value="{{ value.value | escape }}"
+            {% if value.active %}
+              checked
+            {% endif %}
+            {% if value.count == 0 and value.active == false %}
+              disabled
+            {% endif %}
+          >
+          <span class="facet-filter__label">
+            {{ value.label | escape }}
+            {% if value.count > 0 %}
+              ({{ value.count }})
+            {% endif %}
+          </span>
+        </label>
+      </li>
+    {% endfor %}
+  </ul>
+</details>

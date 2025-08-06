@@ -1,0 +1,32 @@
+{% comment %}
+  Badge Pack Section for Iron Phoenix GHG
+  Description: Displays trust and safety badges to build credibility
+  Color and style are controlled via CSS variables.
+{% endcomment %}
+
+{{ 'badge-pack.css' | asset_url | stylesheet_tag }}
+
+<section class="badge-pack">
+  <div class="badge-pack__wrapper">
+    <h2 class="badge-pack__heading">Why Shop With Us?</h2>
+    <ul class="badge-pack__list">
+      <li class="badge-pack__item">✅ Secure Checkout</li>
+      <li class="badge-pack__item">📦 Fast Shipping in the U.S.</li>
+      <li class="badge-pack__item">🎁 Unique Designs Only at Iron Phoenix</li>
+      <li class="badge-pack__item">🧠 Mental Health-Focused Brand</li>
+      <li class="badge-pack__item">🚫 No Drop Shipping – We Hand-Curate!</li>
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Badge Pack",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Badge Pack"
+    }
+  ]
+}
+{% endschema %}

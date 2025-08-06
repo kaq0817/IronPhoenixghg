@@ -1,0 +1,47 @@
+{% comment %} Custom robots.txt – Iron Phoenix GHG SEO & Security Optimized {% endcomment %}
+
+User-agent: *
+Disallow: /search?
+Disallow: /cart
+Disallow: /checkout
+Disallow: /admin
+Disallow: /carts
+Disallow: /orders
+Disallow: /*?*oseid=*
+Disallow: /*preview_theme_id*
+Disallow: /*preview_script_id*
+
+# Allow known good bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: FacebookExternalHit
+Allow: /
+
+User-agent: Pinterestbot
+Allow: /
+
+# Block aggressive SEO scrapers
+User-agent: AhrefsBot
+Crawl-delay: 10
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+# Optional: Block traffic from suspicious regions (not foolproof against VPNs)
+# This should ideally be done via firewall/CDN (Cloudflare, etc.)
+
+Sitemap: {{ shop.url }}/sitemap.xml

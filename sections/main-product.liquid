@@ -1,0 +1,132 @@
+{%- assign ghg_prefix = 'GHG-' -%}
+{%- assign ghg_suffix = product.id | slice: -6, 6 -%}
+{%- assign has_mpn = product.metafields.custom.mpn -%}
+{%- assign google_custom_product = product.metafields.custom.google_custom_product -%}
+{%- if has_mpn == blank and google_custom_product != 'true' -%}
+  {%- assign ghg_code = ghg_prefix | append: ghg_suffix -%}
+{%- else -%}
+  {%- assign ghg_code = has_mpn -%}
+{%- endif -%}
+
+<div class="product-template-wrapper">
+  <div class="product-header">
+    <h1 class="product-title">{{ product.title | truncatewords: 5, '' | escape }}</h1>
+  </div>
+
+
+  {%- if product.images.size > 0 -%}
+    <div class="product-image-gallery" style="display: flex; flex-wrap: wrap; gap: 1.2rem; justify-content: center;">
+      {%- for image in product.images -%}
+        <div class="gallery-image" style="flex: 0 0 300px; max-width: 100%;">
+          {% render 'optimized-image',
+            image: image,
+            alt: image.alt | default: product.title,
+            class: 'gallery-image',
+            width_override: 900
+          %}
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    <div class="product-image-gallery__empty">
+      <p>No images for this product yet.</p>
+    </div>
+  {%- endif -%}
+
+  <div class="product-description rte">
+    {%- if product.metafields.seo.description != blank -%}
+      {{ product.metafields.seo.description | escape }}
+    {%- else -%}
+      {{ product.description | strip_html | split: '<p>' | first | escape }}
+    {%- endif -%}
+  </div>
+
+  <div class="product-structured-info">
+    {%- if product.metafields.custom.materials != blank -%}
+      <h3>Materials</h3>
+      <p>{{ product.metafields.custom.materials | escape }}</p>
+    {%- endif -%}
+    {%- if product.metafields.custom.care != blank -%}
+      <h3>Care Instructions</h3>
+      <p>{{ product.metafields.custom.care | escape }}</p>
+    {%- endif -%}
+    {%- if product.metafields.custom.shipping != blank -%}
+      <h3>Shipping</h3>
+      <p>{{ product.metafields.custom.shipping | escape }}</p>
+    {%- endif -%}
+    <h3>Product Code</h3>
+    <p>{{ ghg_code | escape }}</p>
+  </div>
+
+  <form method="post" action="{{ routes.cart_add_url }}" class="product-form" id="product-form-{{ product.id }}">
+    <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+    <div class="product-buy-block">
+      <label for="Quantity-{{ product.id }}">Quantity:</label>
+      <input type="number" id="Quantity-{{ product.id }}" name="quantity" min="1" value="1">
+      <button type="submit" class="add-to-cart" data-product-id="{{ product.id }}">Add to Cart</button>
+    </div>
+  </form>
+
+  <div class="product-underfold">
+    {%- for i in (1..10) -%}
+      {%- assign field_name = 'photo' | append: i -%}
+      {%- assign image = product.metafields.custom[field_name] -%}
+      {%- if image != blank -%}
+        <div class="underfold-image">
+          {{ image | image_url: width: 800 | image_tag: widths: [400, 600, 800, 1200], preload: true, loading: 'lazy' }}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.product-form').forEach(form => {
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+
+      try {
+        const addRes = await fetch('{{ routes.cart_add_url }}', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (!addRes.ok) throw new Error('Failed to add to cart');
+
+        // Fetch cart sections to update drawer + bubble
+        const cartRes = await fetch('/?sections=cart-drawer,cart-icon-bubble');
+        const cartJson = await cartRes.json();
+
+        // Replace Cart Drawer contents
+        const cartDrawer = document.querySelector('#CartDrawer');
+        if (cartDrawer && cartJson['cart-drawer']) {
+          const parser = new DOMParser();
+          const newDrawerDOM = parser.parseFromString(cartJson['cart-drawer'], 'text/html').querySelector('#CartDrawer');
+          cartDrawer.innerHTML = newDrawerDOM.innerHTML;
+
+          // Reopen cart drawer
+          document.querySelector('cart-drawer')?.open();
+        }
+
+        // Replace Cart Icon bubble
+        const cartBubble = document.querySelector('#cart-icon-bubble');
+        if (cartBubble && cartJson['cart-icon-bubble']) {
+          const parser = new DOMParser();
+          const newBubble = parser.parseFromString(cartJson['cart-icon-bubble'], 'text/html').querySelector('#cart-icon-bubble');
+          cartBubble.replaceWith(newBubble);
+        }
+
+        // Fallback alert if drawer not present
+        if (!document.querySelector('cart-drawer')) {
+          alert('Added to cart!');
+        }
+
+      } catch (err) {
+        console.error('Cart AJAX error:', err);
+        alert('There was an error adding the product to your cart.');
+      }
+    });
+  });
+</script>
+

@@ -1,0 +1,52 @@
+{%- comment -%}
+  Shopify Header Mega Menu
+  - Place inside header or use {% render 'header-mega-menu', menu_handle: 'main-menu' %}
+  - Supports multi-column, featured images, and drag-and-drop content blocks
+{%- endcomment -%}
+
+{% assign nav = linklists[menu_handle] | default: linklists.main-menu %}
+
+<nav class="header-mega-nav" aria-label="Main Navigation">
+  <ul class="mega-menu-list">
+    {% for link in nav.links %}
+      <li class="mega-menu-item{% if link.links.size > 0 %} has-mega{% endif %}">
+        <a href="{{ link.url }}" class="mega-menu-link" aria-haspopup="{% if link.links.size > 0 %}true{% else %}false{% endif %}" aria-expanded="false">
+          {{ link.title | escape }}
+        </a>
+        {% if link.links.size > 0 %}
+          <button class="mega-toggle" aria-label="Show mega menu"></button>
+          <div class="mega-menu-panel">
+            <div class="mega-menu-grid">
+              {% for sublink in link.links %}
+                <div class="mega-col">
+                  <a href="{{ sublink.url }}" class="mega-col-title">{{ sublink.title | escape }}</a>
+                  {% if sublink.links.size > 0 %}
+                    <ul class="mega-sublist">
+                      {% for item in sublink.links %}
+                        <li><a href="{{ item.url }}" class="mega-sublink">{{ item.title | escape }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                  {%- comment -%}
+                  You can add featured image or promotional block here by metafields/settings
+                  Example:
+                  {% if sublink.object.featured_image %}
+                    <img src="{{ sublink.object.featured_image | image_url: width: 180, format: 'webp' }}" alt="{{ sublink.title | escape }}" class="mega-img" loading="lazy" />
+                  {% endif %}
+                  {%- endcomment -%}
+                </div>
+              {% endfor %}
+              {%- comment -%}
+                Optionally: Add a custom promo block, newsletter, or featured product:
+                <div class="mega-col mega-promo">
+                  <img src="{{ 'promo-image.jpg' | asset_url }}" alt="Special Offer">
+                  <p>Shop our latest <a href="/collections/new">New Arrivals</a>!</p>
+                </div>
+              {%- endcomment -%}
+            </div>
+          </div>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

@@ -1,0 +1,83 @@
+/* Branding Section Styles - custom-branding.css */
+
+.branding-section {
+  background: linear-gradient(270deg, #26a69a, #6a1b9a, #26a69a);
+  background-size: 600% 600%;
+  animation: branding-gradient 15s ease infinite;
+  color: var(--color-text-on-dark, white);
+  padding: 4rem 2rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes branding-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.branding-logo {
+  max-width: 180px;
+  margin-bottom: 2rem;
+  border-radius: 50%;
+  border: 4px solid white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.branding-logo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+}
+
+.branding-block {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+}
+
+.branding-heading {
+  font-size: clamp(2.5rem, 6vw, 3rem);
+  margin-bottom: 1rem;
+}
+
+.branding-text {
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
+  line-height: 1.7;
+}
+
+.branding-cta-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  background-color: var(--color-cta, #ffff33);
+  color: var(--color-cta-text, black);
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  animation: pulseBtn 2.5s infinite ease-in-out;
+  transition: transform 0.3s ease;
+}
+
+.branding-cta-btn:hover {
+  background-color: var(--color-cta-hover, #fff200);
+  transform: scale(1.08);
+}
+
+@keyframes pulseBtn {
+  0%, 100% {
+    box-shadow: 0 0 8px #fff200;
+  }
+  50% {
+    box-shadow: 0 0 18px #fffb00;
+  }
+}

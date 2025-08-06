@@ -1,0 +1,83 @@
+.hero-section {
+  position: relative;
+  text-align: center;
+  padding: 5rem 2rem;
+  background-color: #000; /* deep black for contrast */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  z-index: 1;
+  color: rgb(var(--color-body-text));
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,255,255,0.05), rgba(255,0,255,0.05));
+  z-index: 0;
+}
+
+.hero-logo {
+  max-width: 220px;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px #00f0ff);
+  z-index: 1;
+  position: relative;
+}
+
+.hero-headline {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #39ffd4; /* neon green-teal */
+  text-shadow: 0 0 5px #39ffd4, 0 0 10px #0ff;
+  margin: 1rem 0 0.5rem;
+  z-index: 1;
+  position: relative;
+}
+
+.hero-subheadline {
+  font-size: 1.5rem;
+  color: #ff44cc; /* neon pink */
+  text-shadow: 0 0 5px #ff44cc;
+  margin-bottom: 2rem;
+  z-index: 1;
+  position: relative;
+}
+
+.shop-now-btn {
+  display: inline-block;
+  background-color: #e1ff00; /* neon yellow */
+  color: #000;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  box-shadow: 0 0 12px #ffff00, 0 0 18px #ff0;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  z-index: 1;
+  position: relative;
+}
+
+.shop-now-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #ff0, 0 0 30px #fff500;
+}
+
+/* Responsive tweaks */
+@media screen and (max-width: 768px) {
+  .hero-headline {
+    font-size: 2.4rem;
+  }
+
+  .hero-subheadline {
+    font-size: 1.25rem;
+  }
+
+  .hero-section {
+    padding: 3rem 1.5rem;
+  }
+}

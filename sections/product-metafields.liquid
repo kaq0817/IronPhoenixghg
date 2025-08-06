@@ -1,0 +1,61 @@
+<div class="product-metafields">
+  {% if product.metafields.custom.short_trade_description %}
+    <div class="short-description">
+      <strong>Quick Summary:</strong>
+      <p>{{ product.metafields.custom.short_trade_description.value | escape }}</p>
+    </div>
+  {% endif %}
+
+  {% if product.metafields.custom.key_features %}
+    <div class="key-features">
+      <strong>Key Features:</strong>
+      <ul>
+        {% for feature in product.metafields.custom.key_features.value %}
+          <li>{{ feature | escape }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <div class="product-specs">
+    {% if product.metafields.custom.google_color %}
+      <p><strong>Color:</strong> {{ product.metafields.custom.google_color.value | escape }}</p>
+    {% endif %}
+    {% if product.metafields.custom.size %}
+      <p><strong>Size:</strong> {{ product.metafields.custom.size.value | escape }}</p>
+    {% endif %}
+    {% if product.metafields.custom.male_female_unisex %}
+      <p><strong>Gender:</strong> {{ product.metafields.custom.male_female_unisex.value | escape }}</p>
+    {% endif %}
+  </div>
+
+  {% if product.metafields.custom.faqs and product.metafields.custom.faqs.value.size > 0 %}
+    <div class="product-faqs">
+      <h3>Frequently Asked Questions</h3>
+      {% for faq in product.metafields.custom.faqs.value %}
+        <details class="faq-item">
+          <summary><strong>{{ faq.question | escape }}</strong></summary>
+          <p>{{ faq.answer | escape }}</p>
+        </details>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if product.metafields.custom.xyz %}
+    <div class="product-xyz">
+      <strong>XYZ:</strong> {{ product.metafields.custom.xyz | escape }}
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Product Metafields",
+  "settings": [
+    {
+      "type": "header",
+      "content": "No settings yet—metafields displayed automatically from product."
+    }
+  ]
+}
+{% endschema %}

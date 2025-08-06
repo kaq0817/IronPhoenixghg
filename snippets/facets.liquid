@@ -1,0 +1,38 @@
+<div class="facets-container" data-id="{{ section.id }}">
+  {%- if enable_filtering -%}
+    <facet-filters>
+      {% for filter in results.filters %}
+        <div class="facet-group">
+          <h3 class="facet-title">{{ filter.label | escape }}</h3>
+          <ul class="facet-list">
+            {% for value in filter.values %}
+              <li class="facet-item">
+                <label>
+                  <input type="checkbox"
+                         name="{{ filter.param_name | escape }}"
+                         value="{{ value.value | escape }}"
+                         {% if value.active %}checked{% endif %}
+                         {% if value.count == 0 and value.active != true %}disabled{% endif %} />
+                  <span class="facet-label">{{ value.label | escape }} ({{ value.count }})</span>
+                </label>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </facet-filters>
+  {%- endif -%}
+
+  {%- if enable_sorting -%}
+    <div class="facet-sorting">
+      <label for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
+      <select name="sort_by" id="SortBy" onchange="this.form.submit()">
+        {% for option in results.sort_options %}
+          <option value="{{ option.value | escape }}" {% if option.value == results.sort_by %}selected{% endif %}>
+            {{ option.name | escape }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+  {%- endif -%}
+</div>

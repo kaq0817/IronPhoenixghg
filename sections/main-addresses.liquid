@@ -1,0 +1,50 @@
+{% schema %}
+{
+  "name": "Customer Addresses",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "addresses_heading",
+      "label": "Addresses Heading",
+      "default": "Your Addresses"
+    },
+    {
+      "type": "range",
+      "id": "addresses_per_page",
+      "label": "Addresses per page",
+      "min": 2,
+      "max": 10,
+      "default": 5
+    }
+  ]
+}
+{% endschema %}
+
+<main id="customer-addresses" class="customer-addresses-section" role="main" aria-label="Customer addresses">
+  <header>
+    <h1>{{ section.settings.addresses_heading | escape }}</h1>
+    <a href="{{ routes.account_url }}" class="return-account-link">
+      {{ 'customer.account.return' | t | escape }}
+    </a>
+  </header>
+  {% paginate customer.addresses by section.settings.addresses_per_page %}
+    <ul class="address-list">
+      {% for address in customer.addresses %}
+        <li class="customer-address" id="address-{{ address.id }}">
+          <div>
+            {{ address | format_address }}
+          </div>
+          <div class="address-actions">
+            <a href="{{ address.url }}?edit=true" class="edit-address-link">
+              {{ 'customer.addresses.edit' | t | escape }}
+            </a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+    <nav class="pagination" role="navigation" aria-label="Addresses pagination">
+      {{ paginate | default_pagination }}
+    </nav>
+  {% endpaginate %}
+</main>

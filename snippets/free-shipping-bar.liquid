@@ -1,0 +1,22 @@
+{% comment %}
+  Free Shipping Progress Bar - Iron Phoenix GHG
+{% endcomment %}
+{{ 'free-shipping-bar.css' | asset_url | stylesheet_tag }}
+
+{% assign threshold_cents = 5000 %}
+{% assign cart_total = cart.total_price | default: 0 %}
+{% assign progress = cart_total | times: 100 | divided_by: threshold_cents %}
+{% if progress > 100 %}
+  {% assign progress = 100 %}
+{% endif %}
+
+<div class="free-shipping-bar">
+  {% if cart_total >= threshold_cents %}
+    <p>🎉 You qualify for free shipping!</p>
+  {% else %}
+    <p>Add {{ threshold_cents | minus: cart_total | money }} more for free shipping!</p>
+  {% endif %}
+  <div class="progress-container">
+    <div class="progress-bar" style="width: {{ progress }}%;"></div>
+  </div>
+</div>

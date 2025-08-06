@@ -1,0 +1,62 @@
+// snippets/meta-tags.liquid
+
+{%- comment -%}
+  Iron Phoenix GHG - Meta Tags Snippet
+  Centralizes SEO, OG, Twitter, and canonical meta for performance & clarity
+{%- endcomment -%}
+
+<title>
+  {{ page_title }}
+  {%- if current_tags %} – tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+  {%- if current_page != 1 %} – Page {{ current_page }}{% endif -%}
+  {%- unless page_title contains shop.name %} – {{ shop.name }}{% endunless -%}
+</title>
+
+<meta name="description" content="{% if page_description %}{{ page_description | escape }}{% elsif product.description %}{{ product.description | strip_html | truncate: 160 }}{% elsif article.excerpt %}{{ article.excerpt | strip_html | truncate: 160 }}{% else %}{{ shop.meta_description | escape }}{% endif %}">
+<link rel="canonical" href="{{ canonical_url }}">
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="{{ shop.name }}">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:title" content="{{ page_title | escape }}">
+<meta property="og:description" content="{% if page_description %}{{ page_description | escape }}{% else %}{{ product.description | strip_html | truncate: 160 }}{% endif %}">
+<meta property="og:type" content="{% if template.name contains 'product' %}product{% elsif template.name contains 'article' %}article{% else %}website{% endif %}">
+<meta property="og:image" content="{% if settings.share_image %}{{ settings.share_image | image_url: width: 1200 }}{% elsif page_image %}{{ page_image | image_url: width: 1200 }}{% endif %}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page_title | escape }}">
+<meta name="twitter:description" content="{% if page_description %}{{ page_description | escape }}{% else %}{{ product.description | strip_html | truncate: 160 }}{% endif %}">
+<meta name="twitter:image" content="{% if settings.share_image %}{{ settings.share_image | image_url: width: 1200 }}{% elsif page_image %}{{ page_image | image_url: width: 1200 }}{% endif %}">
+<meta name="twitter:site" content="@IronPhoenixGHG">
+
+<!-- Favicon -->
+{% if settings.favicon %}
+  <link rel="icon" href="{{ settings.favicon | image_url: width: 32 }}">
+{% endif %}
+
+<!-- Robots Meta -->
+{%- comment -%} {% render 'robots-custom' %} {%- endcomment -%}
+
+<!-- JSON-LD Organization (Homepage only) -->
+{% if template.name == 'index' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "{{ shop.name }}",
+  "url": "{{ shop.url }}",
+  "logo": "{{ settings.share_image | image_url: width: 600 }}",
+  "sameAs": [
+    "https://www.youtube.com/@ssgohardgaming",
+    "https://www.facebook.com/GohardgamingIronPhoenix",
+    "https://twitter.com/SSgohardgaming",
+    "https://www.pinterest.com/karenbrandmeyer",
+    "https://tiktok.com/@gohardgamingdiscord",
+    "https://twitch.tv/shadowseeker_1"
+  ]
+}
+</script>
+{% endif %}

@@ -1,0 +1,159 @@
+{% comment %}
+  Section: Contact Us for Iron Phoenix GHG
+  Purpose: Displays detailed contact information, FAQs, support hours, and company details.
+  Designed for clarity, transparency, and trust-building.
+  Features text-only phone contact for record-keeping.
+{% endcomment %}
+
+{{ 'contact-us.css' | asset_url | stylesheet_tag }}
+
+<div class="contact-us-container">
+  <h1 class="contact-us-title">Contact Iron Phoenix GHG</h1>
+  <p class="contact-us-intro">
+    We’re here to help with your questions, orders, or feedback. At Iron Phoenix GHG, we’re committed to providing
+    excellent support and building a strong community.
+  </p>
+
+  <!-- Honeypot spam prevention -->
+  <div style="display:none;">
+    <input type="text" name="honeypot" tabindex="-1" autocomplete="off">
+  </div>
+
+  <div class="contact-section">
+    <h2 class="section-heading">Check Our FAQs First 📚</h2>
+    <p>Visit our <a href="/pages/faq" class="contact-link">FAQ page</a> for quick answers to common questions.</p>
+  </div>
+
+  <div class="contact-section">
+    <h2 class="section-heading">How Can We Help You? 💬</h2>
+    <div class="contact-details-grid">
+      <div class="contact-detail-item">
+        <h3>Customer Support (Text Only)</h3>
+        <p>Questions about products, orders, or feedback?</p>
+        <p>
+          Email:
+          <a href="mailto:support@ironphoenix.store" class="contact-link" id="customer-support-email">support@ironphoenix.store</a>
+        </p>
+        <p>
+          Text/WhatsApp:
+          <a href="sms:+15184158496" class="contact-link" id="customer-support-phone">(518) 415-8496 (Text Only)</a>
+        </p>
+      </div>
+      <div class="contact-detail-item">
+        <h3>Business Inquiries (Text Only)</h3>
+        <p>For proposals or collaborations:</p>
+        <p>
+          Email:
+          <a href="mailto:shadowseeker@ironphoenix.store" class="contact-link" id="business-inquiry-email">shadowseeker@ironphoenix.store</a>
+        </p>
+        <p>
+          Text:
+          <a href="sms:+13074395613" class="contact-link" id="business-inquiry-phone">(307) 439-5613 (Text Only)</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-section">
+    <h2 class="section-heading">Response Time & Service Area 🕒</h2>
+    <p>Our customer support team is available during the following hours:</p>
+    <p><strong>Customer Support Hours:</strong> Daily, 10:00 AM - 9:00 PM EST (Eastern Standard Time)</p>
+    <p><strong>Business Inquiries Hours:</strong> Monday - Friday, 9:00 AM - 5:00 PM EST (Eastern Standard Time)</p>
+    <p class="note-text important">
+      **Important:** To ensure the efficiency and security of our operations, we exclusively provide support and engage
+      in business communications within the **United States and during our stated EST business hours.** Inquiries
+      received outside of these parameters, or those deemed irrelevant to our services, will not receive a response.
+      This allows us to focus our resources on legitimate customer and business needs.
+    </p>
+    <p class="note-text">
+      If you are a legitimate customer within the US and have not heard back within 4 business hours during our support
+      times, please check your spam/junk folders. For urgent, valid customer concerns, you may also message us on
+      Facebook, Instagram, or Discord.
+    </p>
+  </div>
+
+  <div class="contact-section">
+    <h2 class="section-heading">Your Feedback Matters 🌱</h2>
+    <p>
+      Share compliments or suggestions via
+      <a href="mailto:support@ironphoenix.store" class="contact-link">support@ironphoenix.store</a>. Your input helps us improve!
+    </p>
+  </div>
+
+  <div class="contact-section">
+    <h2 class="section-heading">Our Websites</h2>
+    <ul class="website-list">
+      <li>Main Store: <a href="https://ironphoenix.store" class="contact-link" target="_blank">ironphoenix.store</a></li>
+      <li>Etsy Shop: <a href="https://ironphoenixghg.etsy.com" class="contact-link" target="_blank">ironphoenixghg.etsy.com</a></li>
+      <li>Coming Soon: ironphoenixghg.store, gohardgaming.store, gohardgaminghq.com</li>
+      <li>Community: <a href="https://gohardgamingdiscord.com" class="contact-link" target="_blank">gohardgamingdiscord.com</a> (under construction)</li>
+    </ul>
+  </div>
+
+  <div class="contact-section">
+    <h2 class="section-heading">Company Details</h2>
+    <p><strong>Legal Name:</strong> Go Hard Gaming Discord LLC</p>
+    <p><strong>DBA:</strong> Iron Phoenix GHG</p>
+    <p><strong>Address:</strong> 142 W. Milton Rd., Trailer 7, Ballston Spa, NY 12020, USA</p>
+    <p class="note-text">Note: All inquiries are handled by a single operator.</p>
+  </div>
+
+  <div class="contact-section">
+    <h2 class="section-heading">Business Proposals</h2>
+    <p>
+      Email proposals to <a href="mailto:shadowseeker@ironphoenix.store" class="contact-link" id="business-proposals-bottom-email">shadowseeker@ironphoenix.store</a>.
+    </p>
+    <p class="note-text important">
+      Important: We are not seeking new partnerships or unsolicited services. Proposals are reviewed Monday - Friday,
+      9:00 AM - 5:00 PM EST. Decisions are final, and repeated follow-ups will be filtered as spam.
+    </p>
+  </div>
+
+  <div class="contact-section">
+    <h2 class="section-heading">Store Hours</h2>
+    <p><strong>Online store:</strong> Open 24/7.</p>
+    <p><strong>Order processing:</strong> Within 8 business hours.</p>
+  </div>
+
+  <div class="contact-section">
+    <h2 class="section-heading">Join Our Community</h2>
+    <p>Connect with us on Discord for gaming updates and fun!</p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Contact Us (GHG)",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Us (Iron Phoenix GHG)"
+    }
+  ]
+}
+{% endschema %}

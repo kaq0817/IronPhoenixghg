@@ -1,0 +1,51 @@
+{% comment %}
+  Iron Phoenix GHG brand color variables
+  Include this via {% render 'css-variables' %} inside <head>
+{% endcomment %}
+/* === Brand Colors === */
+--color-background-gradient-start: #26a69a;
+--color-background-gradient-end: #6a1b9a;
+--color-accent: #ffff33; /* CTA */
+--color-accent-hover: #fff200; /* CTA hover */
+--color-text-main: #ffffff;
+--color-text-cta: #000000;
+--color-border: #ffffff; /* fallback border color if not using outline_1 */
+
+/* === Typography === */
+--font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+--font-body-style: {{ settings.type_body_font.style }};
+--font-body-weight: {{ settings.type_body_font.weight }};
+--font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
+
+--font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+--font-heading-style: {{ settings.type_header_font.style }};
+--font-heading-weight: {{ settings.type_header_font.weight }};
+--font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
+
+/* === Layout & Spacing === */
+--page-width: {{ settings.page_width | divided_by: 10 }}rem;
+--section-spacing-desktop: {{ settings.spacing_sections }}px;
+--section-spacing-mobile: {% if settings.spacing_sections < 24 %}{{ settings.spacing_sections }}{% else %}{{ settings.spacing_sections | times: 0.7 | round | at_least: 20 }}{% endif %}px;
+
+--grid-desktop-gap: {{ settings.spacing_grid_horizontal }}px;
+--grid-mobile-gap: {{ settings.spacing_grid_horizontal | divided_by: 2 }}px;
+
+/* === Cards & Components === */
+--product-card-radius: {{ settings.card_corner_radius | divided_by: 10.0 }}rem;
+--card-border-opacity: {{ settings.card_border_opacity | divided_by: 100.0 }};
+--card-shadow-opacity: {{ settings.card_shadow_opacity | divided_by: 100.0 }};
+
+/* === Buttons === */
+--buttons-radius: {{ settings.buttons_radius }}px;
+--buttons-border-width: {% if settings.buttons_border_opacity > 0 %}{{ settings.buttons_border_thickness }}{% else %}0{% endif %}px;
+--buttons-border-opacity: {{ settings.buttons_border_opacity | divided_by: 100.0 }};
+--buttons-shadow-opacity: {{ settings.buttons_shadow_opacity | divided_by: 100.0 }};
+
+/* === Inputs === */
+--inputs-radius: {{ settings.inputs_radius }}px;
+--inputs-border-opacity: {{ settings.inputs_border_opacity | divided_by: 100.0 }};
+--inputs-shadow-opacity: {{ settings.inputs_shadow_opacity | divided_by: 100.0 }};
+  --inputs-border-opacity: {{ settings.inputs_border_opacity | divided_by: 100.0 }};
+  --inputs-shadow-opacity: {{ settings.inputs_shadow_opacity | divided_by: 100.0 }};
+}
+

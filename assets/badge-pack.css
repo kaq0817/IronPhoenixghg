@@ -1,0 +1,44 @@
+/* Badge Pack Styles - badge-pack.css */
+.badge-pack {
+  background-color: #ffffff;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.badge-pack h2 {
+  color: #2c3e50;
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+}
+
+.badge-pack__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+}
+
+.badge-pack__grid li {
+  text-align: center;
+  max-width: 140px;
+}
+
+.badge-pack__grid img {
+  width: 100px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.badge-pack__grid img:hover {
+  transform: scale(1.05);
+}
+
+.badge-pack__grid p {
+  margin-top: 0.5rem;
+  font-weight: bold;
+  color: #6a1b9a;
+  font-size: 0.95rem;
+}

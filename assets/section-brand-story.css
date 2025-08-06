@@ -1,0 +1,20 @@
+.brand-section {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+.brand-section__heading {
+  margin-bottom: 1rem;
+}
+.brand-section__content {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+.brand-section--left {
+  text-align: left;
+}
+.brand-section--center {
+  text-align: center;
+}
+.brand-section--right {
+  text-align: right;
+}
