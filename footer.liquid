@@ -200,9 +200,9 @@
                     <button
                       type="submit"
                       class="newsletter-form__button field__button"
-                      name="commit"
-                      id="Subscribe"
-                      aria-label="{{ 'newsletter.button_label' | t }}"
+                    name="commit"
+                    id="Subscribe-{{ section.id }}"
+                    aria-label="{{ 'newsletter.button_label' | t }}"
                     >
                       <span class="svg-wrapper">
                         {{- 'icon-arrow.svg' | inline_asset_content -}}
