@@ -12,7 +12,8 @@
     <meta name="robots" content="noindex, nofollow">
 
     <link rel="canonical" href="{{ canonical_url }}">
-    <meta name="facebook-domain-verification" content="sd9ntahk204ty8kujdfxg63mbre2ar">
+    <!-- Facebook Domain Verification (Add your own if needed) -->
+    {%- comment -%} <meta name="facebook-domain-verification" content="REPLACE_ME"> {%- endcomment -%}
 
     <title>{% if page_title %}{{ page_title }}{% else %}{{ shop.name }}{% endif %}</title>
     {% render 'meta-tags' %}
@@ -84,6 +85,11 @@
 
     <script defer src="{{ 'analytics.js' | asset_url }}"></script>
 
+    {%- comment -%}
+      Google Tag Manager or Analytics
+      Paste your GTM or GA4 code here, or set via Theme Settings.
+    {%- endcomment -%}
+
     {% if settings.gtm_id != blank %}
       <!-- Google Tag Manager -->
       <script>
@@ -110,10 +116,11 @@
 
   <body class="gradient">
     <noscript>
-      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TQD686VL" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      <!-- Google Tag Manager (noscript) -->
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-REPLACE_ME" height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
 
-    {% if settings.logo_image != blank %}
+    {%- if settings.logo_image != blank -%}
       <img
         src="{{ settings.logo_image | image_url: width: 400 }}"
         alt="{{ shop.name | escape }}"
@@ -122,7 +129,7 @@
         style="max-width: 220px; width: 100%; height: auto; display: block; margin: 2rem auto;"
         loading="lazy"
       >
-    {% endif %}
+    {%- endif -%}
     <h1 style="color: {{ settings.color_primary }}">{{ settings.store_tagline | escape }}</h1>
 
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
